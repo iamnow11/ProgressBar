@@ -47,23 +47,25 @@ app.use((req, res, next) => {
     throw err;
   });
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
     serveStatic(app);
   }
 
-  // ALWAYS serve the app on port 5000
-  // this serves both the API and the client
-  const port = 5000;
+  const port = process.env.PORT || 5000;
+  const host = process.env.HOST || '0.0.0.0';
+
   server.listen({
     port,
-    host: "0.0.0.0",
+    host,
     reusePort: true,
   }, () => {
-    log(`serving on port ${port}`);
+    log(`Server running at http://${host}:${port}`);
+    if (host === '0.0.0.0') {
+      log('You can access the app locally at:');
+      log(`  - http://localhost:${port}`);
+      log(`  - http://127.0.0.1:${port}`);
+    }
   });
 })();

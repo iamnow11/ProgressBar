@@ -33,7 +33,16 @@ npm install
 npm run dev
 ```
 
-The application will be available at http://localhost:5000
+The application will be available at:
+- http://localhost:5000 (preferred)
+- http://127.0.0.1:5000
+- http://[your-local-ip]:5000 (for local network access)
+
+### Notes for Local Development
+- The development server runs both the frontend and backend on port 5000
+- Hot Module Replacement (HMR) is enabled by default
+- API requests are automatically proxied to the backend
+- No additional configuration is needed for local development
 
 ## Project Structure
 
@@ -59,10 +68,16 @@ The application will be available at http://localhost:5000
 
 ## Available Scripts
 
-- `npm run dev` - Starts the development server
+- `npm run dev` - Starts the development server (default port: 5000)
 - `npm run build` - Builds the application for production
 - `npm run start` - Runs the production build
 - `npm run check` - Runs TypeScript type checking
+
+## Environment Variables (Optional)
+
+You can customize the server configuration using:
+- `PORT` - Change the default port (default: 5000)
+- `HOST` - Change the host binding (default: 0.0.0.0)
 
 ## Styling
 
