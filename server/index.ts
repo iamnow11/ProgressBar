@@ -54,18 +54,18 @@ app.use((req, res, next) => {
   }
 
   const port = process.env.PORT || 5000;
-  const host = process.env.HOST || '0.0.0.0';
+  const host = process.env.HOST || 'localhost'; 
 
-  server.listen({
-    port,
-    host,
-    reusePort: true,
-  }, () => {
-    log(`Server running at http://${host}:${port}`);
-    if (host === '0.0.0.0') {
-      log('You can access the app locally at:');
-      log(`  - http://localhost:${port}`);
-      log(`  - http://127.0.0.1:${port}`);
-    }
-  });
+  try {
+    server.listen({
+      port,
+      host,
+    }, () => {
+      log(`Server running at http://${host}:${port}`);
+      log(`You can access the app at http://localhost:${port}`);
+    });
+  } catch (error) {
+    log(`Failed to start server: ${error}`);
+    process.exit(1);
+  }
 })();
